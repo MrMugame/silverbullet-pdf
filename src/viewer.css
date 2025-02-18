@@ -1,8 +1,11 @@
+@import url("https://esm.sh/pdfjs-dist@4.10.38/web/pdf_viewer.css");
+
 body {
     background-color: #808080;
     margin: 0;
     padding: 0;
 }
+
 #viewerContainer {
     overflow: auto;
     position: absolute;
@@ -11,6 +14,7 @@ body {
 }
 
 .topbar {
+    z-index: 9999   ;
     height: 32px;
 }
 

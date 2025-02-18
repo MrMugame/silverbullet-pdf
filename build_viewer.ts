@@ -2,14 +2,14 @@ import { fileURLToPath } from "node:url";
 import { parseArgs } from "@std/cli/parse-args";
 import { denoPlugins } from "@luca/esbuild-deno-loader";
 import * as esbuild from "esbuild";
-import { minify } from "html-minifier-terser";
 
 const DIST = "dist";
-const SRC = "src"
+const SRC = "src";
 const HTML = "viewer";
-const TS = "viewer"
+const TS = "viewer";
+const CSS = "viewer";
 
-async function buildFile(dir: string, input: string, output: string) {
+async function buildTSFile(dir: string, input: string, output: string) {
   const result = await esbuild.build({
     entryPoints: [
       {
@@ -32,8 +32,22 @@ async function buildFile(dir: string, input: string, output: string) {
   if (result.metafile) {
       console.log("Bundle info", await esbuild.analyzeMetafile(result.metafile));
   }
+}
 
-  esbuild.stop();
+async function buildCSSFile(dir: string, input: string, output: string) {
+  await esbuild.build({
+    entryPoints: [
+      {
+        in: `${input}.css`,
+        out: output,
+      },
+    ],
+    outdir: dir,
+    absWorkingDir: Deno.cwd(),
+    bundle: true,
+    minify: true,
+    plugins: []
+  });
 }
 
 async function wrapFile(path: string) {
@@ -50,11 +64,15 @@ async function build(debug: boolean): Promise<void> {
   console.log("Now ESBuilding the pdfviewer plug...");
 
   // Build JS File
-  await buildFile(DIST, `${SRC}/${TS}`, `${TS}`);
+  await buildTSFile(DIST, `${SRC}/${TS}`, TS);
+  await buildCSSFile(DIST, `${SRC}/${CSS}`, CSS);
+  esbuild.stop();
 
   // Build HTML file (Probably not really necessary)
-  const html = await minify(await Deno.readTextFile(`${SRC}/${HTML}.html`));
-  await Deno.writeTextFile(`${DIST}/${HTML}.html`, html);
+  const css = await Deno.readTextFile(`${DIST}/${CSS}.css`);
+  const html = await Deno.readTextFile(`${SRC}/${HTML}.html`);
+  const content = `<style>${css.replaceAll("\n", "")}</style>\n${html}`
+  await Deno.writeTextFile(`${DIST}/${HTML}.html`, content);
 
   // Export files as strings from Typescript
   await wrapFile(`${DIST}/${TS}.js`);

@@ -12,8 +12,6 @@
 //    (document.getElementById("editor") as HTMLTextAreaElement).focus();
 // });
 
-import "https://esm.sh/pdfjs-dist@4.10.38/web/pdf_viewer.css"
-
 import * as pdfjsLib from "https://esm.sh/pdfjs-dist@4.10.38/build/pdf.mjs?target=es2022";
 import * as pdfjsViewer from "https://esm.sh/pdfjs-dist@4.10.38/web/pdf_viewer.mjs?target=es2022";
 

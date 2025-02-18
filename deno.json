@@ -4,7 +4,6 @@
 
     "esbuild": "https://deno.land/x/esbuild@v0.25.0/mod.js",
     "@luca/esbuild-deno-loader": "jsr:@luca/esbuild-deno-loader@^0.10.3",
-    "html-minifier-terser": "https://esm.sh/html-minifier-terser@7.2.0",
     "@std/cli": "jsr:@std/cli"
   },
   "tasks": {
