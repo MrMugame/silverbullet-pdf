@@ -1,0 +1,5 @@
+name: pdfviewer
+functions:
+  PDFViewer:
+    path: ./src/main.ts:viewer
+    editor: ["pdf"]
