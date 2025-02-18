@@ -1,3 +1,6 @@
+import "pdfjs-dist/web/pdf_viewer.css"
+import "./viewer.css"
+
 // // deno-lint-ignore no-explicit-any
 // globalThis.silverbullet.addEventListener("file-update", (event: any) => {
 //     //(document.getElementById("editor") as HTMLTextAreaElement).value = new TextDecoder().decode(event.detail.data);
@@ -12,10 +15,14 @@
 //    (document.getElementById("editor") as HTMLTextAreaElement).focus();
 // });
 
-import * as pdfjsLib from "https://esm.sh/pdfjs-dist@4.10.38/build/pdf.mjs?target=es2022";
-import * as pdfjsViewer from "https://esm.sh/pdfjs-dist@4.10.38/web/pdf_viewer.mjs?target=es2022";
+import * as pdfjsLib from "pdfjs-dist";
+import * as pdfjsViewer from "pdfjs-dist/web/pdf_viewer.mjs";
+//import * as pdfjsTypes from 'pdfjs-dist/types/web/pdf_viewer';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = "https://esm.sh/pdfjs-dist@4.10.38/build/pdf.worker.mjs?target=es2022";
+// @ts-ignore: We need to import untyped js here
+import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.mjs?raw' with { type: "text" };
+
+pdfjsLib.GlobalWorkerOptions.workerSrc = "data:application/javascript," + encodeURIComponent(pdfjsWorker);
 
 const SEARCH_FOR = ""; // try "Mozilla";
 
@@ -58,13 +65,9 @@ eventBus.on("pagesinit", function () {
 });
 
 globalThis.silverbullet.addEventListener("file-open", async (event: any) => {
-    // Loading document.
     const loadingTask = pdfjsLib.getDocument(event.detail.data as Uint8Array);
-
     const pdfDocument = await loadingTask.promise;
 
-    // Document loaded, specifying document for the viewer and
-    // the (optional) linkService.
     pdfViewer.setDocument(pdfDocument);
     pdfLinkService.setDocument(pdfDocument, null);
 });

@@ -1,6 +1,5 @@
-export {};
+declare module '*.css';
 
-declare global {
-    // deno-lint-ignore no-explicit-any, no-var
+declare module globalThis {
     var silverbullet: DocumentFragment & { sendMessage : (type: string, data: Record<string, any>) => void };
 }

@@ -1,0 +1,19 @@
+{
+  "name": "pdfviewer",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build && silverbullet plug:compile --info --importmap import_map.json pdfviewer.plug.yaml",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "typescript": "~5.7.2",
+    "vite": "^6.1.0"
+  },
+  "dependencies": {
+    "pdfjs-dist": "^4.10.38"
+  }
+}
