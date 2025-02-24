@@ -20,7 +20,7 @@ import * as pdfjsViewer from "pdfjs-dist/web/pdf_viewer.mjs";
 //import * as pdfjsTypes from 'pdfjs-dist/types/web/pdf_viewer';
 
 // @ts-ignore: We need to import untyped js here
-import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.mjs?raw' with { type: "text" };
+import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?raw' with { type: "text" };
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = "data:application/javascript," + encodeURIComponent(pdfjsWorker);
 
