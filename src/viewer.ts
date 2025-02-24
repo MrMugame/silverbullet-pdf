@@ -1,7 +1,6 @@
 import "pdfjs-dist/web/pdf_viewer.css"
 import "./viewer.css"
 
-// // deno-lint-ignore no-explicit-any
 // globalThis.silverbullet.addEventListener("file-update", (event: any) => {
 //     //(document.getElementById("editor") as HTMLTextAreaElement).value = new TextDecoder().decode(event.detail.data);
 // });
