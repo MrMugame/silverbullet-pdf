@@ -56,7 +56,7 @@ pdfScriptingManager.setViewer(pdfViewer);
 
 eventBus.on("pagesinit", function () {
     // We can use pdfViewer now, e.g. let's change default scale.
-    pdfViewer.currentScaleValue = "page-width";
+    pdfViewer.currentScaleValue = "page-height";
 
     // We can try searching for things.
     if (SEARCH_FOR) {
