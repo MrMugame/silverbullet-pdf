@@ -1,0 +1,16 @@
+{
+    "tasks": {
+        "install": "./scripts/install.sh",
+        "build": "./scripts/build.sh",
+        "download": "./scripts/download.sh"
+    },
+    "imports": {
+        "@silverbulletmd/silverbullet/": "jsr:@silverbulletmd/silverbullet@^2.0.0/",
+        "@silverbulletmd/silverbullet/syscalls": "jsr:@silverbulletmd/silverbullet@^2.0.0/syscalls",
+        "@silverbulletmd/silverbullet/type": "jsr:@silverbulletmd/silverbullet@^2.0.0/type",
+        "@silverbulletmd/silverbullet/lib": "jsr:@silverbulletmd/silverbullet@^2.0.0/lib",
+        "@silverbulletmd/silverbullet/type/client": "jsr:@silverbulletmd/silverbullet@^2.0.0/type/client"
+    },
+    "nodeModulesDir": "none",
+    "exclude": [ "./viewer" ]
+}

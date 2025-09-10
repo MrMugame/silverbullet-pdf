@@ -1,0 +1,5 @@
+name: silverbullet-pdf
+functions:
+  PDFViewer:
+    path: ./worker/main.ts:viewer
+    editor: [ "pdf" ]
