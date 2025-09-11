@@ -70,6 +70,7 @@ cp -r "$pdfjs_dir/build/generic/web/images" "$build_dir/web/images"
 cp "$pdfjs_dir/build/generic/web/viewer.html" "$build_dir/web/"
 cp "$pdfjs_dir/build/generic/web/viewer.mjs" "$build_dir/web/"
 cp "$pdfjs_dir/build/generic/web/viewer.css" "$build_dir/web/"
+# Don't copy locale data so it fallbacks to english. locale is a whole mess I don't want to touch
 
 wrap_file "$pdfjs_dir/build/minified/build/pdf.worker.min.mjs" "$build_dir/pdf.worker.wrapped"
 

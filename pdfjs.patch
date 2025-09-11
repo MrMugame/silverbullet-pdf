@@ -1,3 +1,17 @@
+diff --git a/l10n/en-US/viewer.ftl b/l10n/en-US/viewer.ftl
+index df44ab339..7db414ed1 100644
+--- a/l10n/en-US/viewer.ftl
++++ b/l10n/en-US/viewer.ftl
+@@ -31,6 +31,9 @@ pdfjs-zoom-out-button-label = Zoom Out
+ pdfjs-zoom-in-button =
+     .title = Zoom In
+ pdfjs-zoom-in-button-label = Zoom In
++pdfjs-silverbullet-warning =
++    .title = This editor is not part of your browser. It's purpose built for silverbullet. See the source code: https://github.com/MrMugame/silverbullet-pdf
++pdfjs-silverbullet-warning-label = This editor is not part of your browser. It's purpose built for silverbullet. See the source code: https://github.com/MrMugame/silverbullet-pdf
+ pdfjs-zoom-select =
+     .title = Zoom
+ pdfjs-presentation-mode-button =
 diff --git a/web/viewer-snippet.html b/web/viewer-snippet.html
 index 3baf94773..1c5742afd 100644
 --- a/web/viewer-snippet.html
@@ -7,15 +21,48 @@ index 3baf94773..1c5742afd 100644
 -<link rel="resource" type="application/l10n" href="locale/locale.json">
 +<!--<link rel="resource" type="application/l10n" href="locale/locale.json">-->
  <script src="../build/pdf.mjs" type="module"></script>
+diff --git a/web/viewer.css b/web/viewer.css
+index 7822771b5..4afe68b68 100644
+--- a/web/viewer.css
++++ b/web/viewer.css
+@@ -112,6 +112,7 @@
+   --toolbarButton-pageDown-icon: url(images/toolbarButton-pageDown.svg);
+   --toolbarButton-zoomOut-icon: url(images/toolbarButton-zoomOut.svg);
+   --toolbarButton-zoomIn-icon: url(images/toolbarButton-zoomIn.svg);
++  --toolbar-warning-icon: url(images/messageBar_warning.svg);
+   --toolbarButton-presentationMode-icon: url(images/toolbarButton-presentationMode.svg);
+   --toolbarButton-print-icon: url(images/toolbarButton-print.svg);
+   /*#if GENERIC*/
+@@ -542,6 +543,10 @@ body {
+   mask-image: var(--toolbarButton-zoomIn-icon);
+ }
+ 
++#warningComment::before {
++  mask-image: var(--toolbar-warning-icon);
++}
++
+ #editorCommentButton::before {
+   mask-image: var(--toolbarButton-editorComment-icon);
+   transform: scaleX(var(--dir-factor));
 diff --git a/web/viewer.html b/web/viewer.html
-index 8a98e1215..d609670de 100644
+index 8a98e1215..16ff7c21c 100644
 --- a/web/viewer.html
 +++ b/web/viewer.html
-@@ -48,6 +48,7 @@ See https://github.com/adobe-type-tools/cmap-resources
+@@ -47,6 +47,7 @@ See https://github.com/adobe-type-tools/cmap-resources
+ <!--#if MOZCENTRAL-->
  <!--<script src="resource://pdf.js/web/viewer.mjs" type="module"></script>-->
  <!--#elif !MOZCENTRAL-->
- <!--<script src="viewer.mjs" type="module"></script>-->
 +<!--<script src="../../viewer/silverbullet.js" type="module"></script>-->
+ <!--<script src="viewer.mjs" type="module"></script>-->
  <!--#elif /* Development mode. */-->
      <link rel="resource" type="application/l10n" href="locale/locale.json">
- 
+@@ -242,6 +243,9 @@ See https://github.com/adobe-type-tools/cmap-resources
+                     <option value="4" data-l10n-id="pdfjs-page-scale-percent" data-l10n-args='{ "scale": 400 }'></option>
+                   </select>
+                 </span>
++                <div id="warningComment" class="toolbarButton" tabindex="0" data-l10n-id="pdfjs-silverbullet-warning">
++                    <span data-l10n-id="pdfjs-silverbullet-warning-label"></span>
++                </div>
+               </div>
+               <div id="toolbarViewerRight" class="toolbarHorizontalGroup">
+                 <div id="editorModeButtons" class="toolbarHorizontalGroup" role="radiogroup">
