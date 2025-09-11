@@ -60,7 +60,7 @@ fi
 
 # Copy all the important stuff from the pdf.js build
 
-rm -r $build_dir
+rm -rf $build_dir
 
 mkdir -p $build_dir
 mkdir -p "$build_dir/web"
