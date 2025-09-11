@@ -1,0 +1,5 @@
+name: pdfviewer
+functions:
+  PDFViewer:
+    path: ./viewer.js:viewer
+    editor: ["pdf"]
