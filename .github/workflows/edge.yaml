@@ -1,4 +1,4 @@
-name: Publish
+name: Edge
 on:
   push:
     branches: main
