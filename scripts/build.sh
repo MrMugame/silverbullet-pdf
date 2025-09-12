@@ -73,6 +73,7 @@ cp "$pdfjs_dir/build/generic/web/viewer.css" "$build_dir/web/"
 # Don't copy locale data so it fallbacks to english. locale is a whole mess I don't want to touch
 
 wrap_file "$pdfjs_dir/build/minified/build/pdf.worker.min.mjs" "$build_dir/pdf.worker.wrapped"
+cp "$pdfjs_dir/build/minified/build/pdf.min.mjs" "$build_dir/pdf.min.mjs"
 
 
 # Build the actual client viewer
@@ -82,11 +83,7 @@ wrap_file "$root/dist/viewer/dist/web/viewer.html" "$build_dir/viewer.wrapped"
 
 # Check the deno code
 
-if [ $skip_check == true ]; then
-    for filename in "$root/worker/*.ts"; do
-        deno check $filename
-    done
-fi
+deno check -c deno.json
 
 # Build the worker
 

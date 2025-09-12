@@ -8,9 +8,9 @@
         "@silverbulletmd/silverbullet/": "jsr:@silverbulletmd/silverbullet@^2.0.0/",
         "@silverbulletmd/silverbullet/syscalls": "jsr:@silverbulletmd/silverbullet@^2.0.0/syscalls",
         "@silverbulletmd/silverbullet/type": "jsr:@silverbulletmd/silverbullet@^2.0.0/type",
-        "@silverbulletmd/silverbullet/lib": "jsr:@silverbulletmd/silverbullet@^2.0.0/lib",
-        "@silverbulletmd/silverbullet/type/client": "jsr:@silverbulletmd/silverbullet@^2.0.0/type/client"
+        "@silverbulletmd/silverbullet/type/client": "jsr:@silverbulletmd/silverbullet@^2.0.0/type/client",
+        "pdfjs-dist": "npm:pdfjs-dist@5.4.149"
     },
     "nodeModulesDir": "none",
-    "exclude": [ "./viewer" ]
+    "exclude": [ "./viewer", "./pdfjs", "./dist" ]
 }

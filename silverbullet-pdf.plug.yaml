@@ -3,3 +3,7 @@ functions:
   PDFViewer:
     path: ./worker/main.ts:viewer
     editor: [ "pdf" ]
+  PDFSearch:
+    path: ./worker/main.ts:extract
+    events:
+      - silversearch:index
