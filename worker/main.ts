@@ -45,7 +45,5 @@ export async function extract({ meta }: { meta: DocumentMeta }) {
         return route;
     });
 
-    console.log(navigationMap);
-
     return { content: texts.join(""), cacheMode: "persistent", navigationMap };
 }
