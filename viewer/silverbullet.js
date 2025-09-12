@@ -82,8 +82,14 @@ window.silverbullet.addEventListener("request-save", async () => {
 });
 
 window.silverbullet.addEventListener("file-open", async (event) => {
-    if (AnnotationScrubber.isDirty()) {
-        saveDocument();
+    if (AnnotationScrubber.isDirty()) saveDocument();
+
+    if (event.detail.details?.type === "position") {
+        window.PDFViewerApplication.eventBus.on("documentinit", () => {
+            const page = Math.max(0, Math.min(PDFViewerApplication.pagesCount, event.detail.details.pos));
+
+            window.PDFViewerApplication.page = page;
+        }, { once: true });
     }
 
     await window.PDFViewerApplication.open({ data: event.detail.data });
