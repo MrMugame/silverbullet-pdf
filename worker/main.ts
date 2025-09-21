@@ -8,7 +8,8 @@ import * as pdfjsLib from "../dist/pdf.min.mjs";
 
 import { DocumentEditorContent } from "@silverbulletmd/silverbullet/type/client"
 import { DocumentMeta } from "@silverbulletmd/silverbullet/type/index";
-import { space } from "@silverbulletmd/silverbullet/syscalls";
+import { editor, space } from "@silverbulletmd/silverbullet/syscalls";
+import { version } from "../dist/version.ts";
 
 // For some reason pdfjs will use window.location when setting up a worker, and
 // once that fails it will set up a "fake worker". This prevents this.
@@ -50,4 +51,8 @@ export async function extract({ meta }: { meta: DocumentMeta }) {
     });
 
     return { content: texts.join(""), cacheMode: "persistent", navigationMap };
+}
+
+export async function showVersion() {
+    await editor.flashNotification(`Silverbullet PDF - Version ${version}`);
 }

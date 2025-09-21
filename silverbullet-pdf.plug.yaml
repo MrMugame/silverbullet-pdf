@@ -7,3 +7,7 @@ functions:
     path: ./worker/main.ts:extract
     events:
       - silversearch:index
+  getVersion:
+    path: "./worker/main.ts:showVersion"
+    command:
+      name: "Silverbullet PDF: Version"

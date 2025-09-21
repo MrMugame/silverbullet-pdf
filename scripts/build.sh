@@ -81,6 +81,10 @@ cp "$pdfjs_dir/build/minified/build/pdf.min.mjs" "$build_dir/pdf.min.mjs"
 npx vite build
 wrap_file "$root/dist/viewer/dist/web/viewer.html" "$build_dir/viewer.wrapped"
 
+# Build the version file
+
+$root/scripts/update_version.sh
+
 # Check the deno code
 
 deno check -c deno.json
