@@ -1,4 +1,4 @@
-name: Publish
+name: Release
 on:
   push:
     tags:
@@ -11,6 +11,7 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           fetch-tags: true
 
       - name: Install Deno
