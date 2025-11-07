@@ -1,7 +1,7 @@
 # Silverbullet PDF
 This plug adds the ability to [Silverbullet](https://github.com/silverbulletmd/silverbullet) to view and annotate pdfs using a slightly modified version of the [pdfjs](https://github.com/mozilla/pdf.js) viewer. If used with [Silversearch](https://github.com/MrMugame/silversearch), Silverbullet PDF can extract text content from PDFs to help you search through them.
 
-![screenshot](docs/preview.png)
+![screenshot](https://raw.githubusercontent.com/mrmugame/silverbullet-pdf/main/docs/preview.png)
 
 ## Installation
 Silverbullet PDF can by installed using the [Library Manager](https://silverbullet.md/Library%20Manager). You will have to navigate to run the `Library: Install` command and install the following URI `ghr:MrMugame/silverbullet-pdf/PLUG.md`.
