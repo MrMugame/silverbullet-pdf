@@ -1,1 +1,0 @@
-deno run -A https://github.com/silverbulletmd/silverbullet/releases/download/edge/plug-compile.js --info ./legacy/pdfviewer.plug.yaml
