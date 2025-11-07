@@ -4,7 +4,7 @@ This plug adds the ability to [Silverbullet](https://github.com/silverbulletmd/s
 ![screenshot](https://raw.githubusercontent.com/mrmugame/silverbullet-pdf/main/docs/preview.png)
 
 ## Installation
-Silverbullet PDF can by installed using the [Library Manager](https://silverbullet.md/Library%20Manager). You will have to navigate to run the `Library: Install` command and install the following URI `ghr:MrMugame/silverbullet-pdf/PLUG.md`.
+Silverbullet PDF is part of the [`Std`](https://silverbullet.md/Repositories/Std) repostitory and can by installed using the [Library Manager](https://silverbullet.md/Library%20Manager). You will have to navigate to `Library/Std/Pages/Library Manager` in *your* space and look for Silverbullet PDF under the available libraries and press `Install`.
 
 ## Internals
 The build process of this plug is rather weird. The steps are as follows
