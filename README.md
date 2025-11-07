@@ -1,25 +1,12 @@
 # Silverbullet PDF
-
 This plug adds the ability to [Silverbullet](https://github.com/silverbulletmd/silverbullet) to view and annotate pdfs using a slightly modified version of the [pdfjs](https://github.com/mozilla/pdf.js) viewer. If used with [Silversearch](https://github.com/MrMugame/silversearch), Silverbullet PDF can extract text content from PDFs to help you search through them.
 
 ![screenshot](docs/preview.png)
 
 ## Installation
-
-The plug is installed like any other plug using SpaceLua. Just add "ghr:MrMugame/silverbullet-pdf" to the plugs array on your CONFIG page.
-
-```lua
-config.set {
-  plugs = {
-    "ghr:MrMugame/silverbullet-pdf"
-  }
-}
-```
-
-Then, run the Plugs: Update update command to download and install the plug.
+Silverbullet PDF can by installed using the [Library Manager](https://silverbullet.md/Library%20Manager). You will have to navigate to run the `Library: Install` command and install the following URI `ghr:MrMugame/silverbullet-pdf/PLUG.md`.
 
 ## Internals
-
 The build process of this plug is rather weird. The steps are as follows
 
 1. Uing `deno task download` the pdfjs repo will be cloned and the `pdfjs.patch` patch will be applied. I opted for this approach, because I wanted to avoid an extra repo for the few changes

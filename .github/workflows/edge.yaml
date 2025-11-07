@@ -32,6 +32,11 @@ jobs:
         run: |
           deno task build
 
+      - name: Build PLUG.md
+        run: |
+          mv PLUG.md PLUG_SRC.md
+          m4 PLUG_SRC.md > PLUG.md
+
       - name: Update release tag
         uses: rickstaa/action-create-tag@v1
         with:
@@ -49,3 +54,4 @@ jobs:
           body: Automated build from commit ${{ github.sha }}
           files: |
             silverbullet-pdf.plug.js
+            PLUG.md

@@ -33,6 +33,11 @@ jobs:
         run: |
           deno task build
 
+      - name: Build PLUG.md
+        run: |
+          mv PLUG.md PLUG_SRC.md
+          m4 PLUG_SRC.md > PLUG.md
+
       - name: Release
         uses: softprops/action-gh-release@v2
         env:
@@ -41,3 +46,4 @@ jobs:
           draft: false
           files: |
             silverbullet-pdf.plug.js
+            PLUG.md
