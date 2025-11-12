@@ -1,4 +1,5 @@
 ---
+nane: Library/mrmugame/Silverbullet-PDF
 tags: meta/library
 files:
 - silverbullet-pdf.plug.js
