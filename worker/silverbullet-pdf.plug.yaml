@@ -1,13 +1,13 @@
 name: silverbullet-pdf
 functions:
   PDFViewer:
-    path: ./worker/main.ts:viewer
+    path: ./main.ts:viewer
     editor: [ "pdf" ]
   PDFSearch:
-    path: ./worker/main.ts:extract
+    path: ./main.ts:extract
     events:
       - silversearch:index
   getVersion:
-    path: "./worker/main.ts:showVersion"
+    path: "./main.ts:showVersion"
     command:
       name: "Silverbullet PDF: Version"

@@ -1,23 +1,22 @@
-import html from "../dist/viewer.wrapped.ts";
-import worker from "../dist/pdf.worker.wrapped.ts"
-// This is so f*cking dumb, deno can't import the types I could directly build
-// here, probably for some religous dumb reasons I don't even want to
-// understand, because it would probably make me punch a hole in the monitor
-// @deno-types="npm:pdfjs-dist"
-import * as pdfjsLib from "../dist/pdf.min.mjs";
+import html from "../dist/viewer.wrapped";
+import worker from "../dist/pdf.worker.wrapped"
 
-import { DocumentEditorContent } from "@silverbulletmd/silverbullet/type/client"
+import * as pdfjsLib from "../dist/pdf.min.mjs";
+const pdfjs = pdfjsLib as typeof import("../pdfjs/build/types/src/pdf");
+
+import { DocumentEditorContent } from "@silverbulletmd/silverbullet/type/client";
 import { DocumentMeta } from "@silverbulletmd/silverbullet/type/index";
 import { editor, space } from "@silverbulletmd/silverbullet/syscalls";
-import { version } from "../dist/version.ts";
+import { version } from "../version";
 
 // For some reason pdfjs will use window.location when setting up a worker, and
 // once that fails it will set up a "fake worker". This prevents this.
+// @ts-expect-error
 self.window = self;
 
 const workerURL = "data:application/javascript," + encodeURIComponent(worker)
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = workerURL;
+pdfjs.GlobalWorkerOptions.workerSrc = workerURL;
 
 export function viewer(): DocumentEditorContent {
     return { html: html.replace("{{ SILVERBULLET-PDF-WORKER-JS }}", workerURL) };
@@ -28,7 +27,7 @@ export async function extract({ meta }: { meta: DocumentMeta }) {
 
     const raw = await space.readDocument(meta.name);
 
-    const task = pdfjsLib.getDocument(raw);
+    const task = pdfjs.getDocument(raw);
     const pdf = await task.promise;
 
     const textPromises = Array.from({ length: pdf.numPages }, async (_, i) => {

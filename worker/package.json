@@ -1,0 +1,10 @@
+{
+    "name": "worker",
+    "private": true,
+    "scripts": {
+        "build": "npx plug-compile silverbullet-pdf.plug.yaml"
+    },
+    "dependencies": {
+        "@silverbulletmd/silverbullet": ">=2.5.3"
+    }
+}

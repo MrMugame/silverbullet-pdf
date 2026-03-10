@@ -14,11 +14,6 @@ jobs:
           fetch-depth: 0
           fetch-tags: true
 
-      - name: Install Deno
-        uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x
-
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
@@ -26,12 +21,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          deno task download
-          deno task install
+          ./scripts/download.sh
+          ./scripts/install.sh
 
       - name: Build step
         run: |
-          deno task build
+          ./scripts/build.sh
 
       - name: Build PLUG.md
         run: |
@@ -45,5 +40,5 @@ jobs:
         with:
           draft: false
           files: |
-            silverbullet-pdf.plug.js
+            worker/silverbullet-pdf.plug.js
             PLUG.md

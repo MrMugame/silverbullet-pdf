@@ -3,3 +3,5 @@ dist/
 .vscode/
 pdfjs/
 silverbullet-pdf.plug.js
+silverbullet-pdf.plug.js.map
+version.ts

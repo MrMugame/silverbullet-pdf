@@ -9,6 +9,6 @@ Silverbullet PDF is part of the [`Std`](https://silverbullet.md/Repositories/Std
 ## Internals
 The build process of this plug is rather weird. The steps are as follows
 
-1. Uing `deno task download` the pdfjs repo will be cloned and the `pdfjs.patch` patch will be applied. I opted for this approach, because I wanted to avoid an extra repo for the few changes
-2. Using `deno task install` all npm install commands are run
-3. Using `deno task build` the build process will be run. This will firstly build pdfjs, copy all the important files over and then do the ~~typical~~ vite (ui) + deno (worker) build.
+1. Uing `./scripts/download.sh` the pdfjs repo will be cloned and the `pdfjs.patch` patch will be applied. I opted for this approach, because I wanted to avoid an extra repo for the few changes
+2. Using `./scripts/install.sh` all npm install commands are run
+3. Using `./scripts/build.sh` the build process will be run. This will firstly build pdfjs, copy all the important files over and then do the ~~typical~~ vite (ui) + deno (worker) build.

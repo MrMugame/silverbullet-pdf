@@ -78,17 +78,13 @@ cp "$pdfjs_dir/build/minified/build/pdf.min.mjs" "$build_dir/pdf.min.mjs"
 
 # Build the actual client viewer
 
-npx vite build
+npm run build
 wrap_file "$root/dist/viewer/dist/web/viewer.html" "$build_dir/viewer.wrapped"
 
 # Build the version file
 
 $root/scripts/update_version.sh
 
-# Check the deno code
-
-deno check -c deno.json
-
 # Build the worker
 
-deno run -A https://github.com/silverbulletmd/silverbullet/releases/download/edge/plug-compile.js --info -c deno.json silverbullet-pdf.plug.yaml
+(cd worker; npm run build)
