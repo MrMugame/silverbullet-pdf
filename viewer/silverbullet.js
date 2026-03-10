@@ -106,5 +106,6 @@ window.silverbullet.addEventListener("file-open", async (event) => {
     });
 });
 
-// Ignore, we have nothing to focus
-// window.silverbullet.addEventListener("focus", async (event) => {});
+window.silverbullet.addEventListener("focus", async (event) => {
+    window.focus();
+});
