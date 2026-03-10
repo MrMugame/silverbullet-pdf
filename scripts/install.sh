@@ -6,6 +6,10 @@ echo "Running \`npm install\` for parent repository"
 
 npm i
 
+echo "Running \`npm install\` for worker"
+
+(cd worker; npm i)
+
 echo "Running \`npm install\` for pdf.js"
 
-cd pdfjs && npm i
+(cd pdfjs; npm i)
