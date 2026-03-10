@@ -8,9 +8,9 @@ wrap_file() {
   local path="$1"
   local out="$2"
 
-  # Read the file content and JSON-encode it with jq -R
+  # Read the file content and JSON-encode it
   local content
-  content=$(deno eval "console.log(JSON.stringify(await Deno.readTextFile('$path')))")
+  content=$(node -e "console.log(JSON.stringify(fs.readFileSync('$path', 'utf8').toString()))")
 
   # Write to the output .ts file
   echo "export default $content" > "${out}.ts"
