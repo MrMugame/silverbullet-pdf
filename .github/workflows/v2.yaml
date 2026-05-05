@@ -47,5 +47,5 @@ jobs:
           tag_name: "edge-v2"
           body: Automated build from commit ${{ github.sha }}
           files: |
-            worker/silverbullet-pdf.plug.js
+            silverbullet-pdf.plug.js
             PLUG.md
