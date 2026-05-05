@@ -2,9 +2,10 @@
     "name": "worker",
     "private": true,
     "scripts": {
-        "build": "npx plug-compile silverbullet-pdf.plug.yaml"
+        "build": "mkdir -p ./assets && cp ../node_modules/pdfjs-dist/legacy/build/pdf.worker.min.mjs ./assets/pdf.worker.min.mjs && cp ../dist/index.html ./assets/index.html && npx plug-compile --dist ../ silverbullet-pdf.plug.yaml"
     },
     "dependencies": {
-        "@silverbulletmd/silverbullet": ">=2.5.3"
+        "@silverbulletmd/silverbullet": ">=2.6.1",
+        "pdfjs-dist": "^5.7.284"
     }
 }

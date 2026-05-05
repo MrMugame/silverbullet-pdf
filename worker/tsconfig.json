@@ -1,9 +1,14 @@
 {
     "compilerOptions": {
-        "target": "ES2020",
-        "module": "ESNext",
-        "lib": ["ESNext", "webworker"],
-        "skipLibCheck": true,
-        "moduleResolution": "bundler",
-    }
+        "target": "es2024",
+        "module": "esnext",
+        "types": [
+            "./global.d.ts",
+        ],
+        "noEmit": true,
+        "moduleDetection": "force"
+    },
+    "include": [
+        "main.ts",
+    ]
 }

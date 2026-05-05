@@ -1,7 +1,5 @@
 node_modules/
 dist/
-.vscode/
-pdfjs/
+worker/assets/
 silverbullet-pdf.plug.js
 silverbullet-pdf.plug.js.map
-version.ts

@@ -1,33 +1,79 @@
-import html from "../dist/viewer.wrapped";
-import worker from "../dist/pdf.worker.wrapped"
-
-import * as pdfjsLib from "../dist/pdf.min.mjs";
-const pdfjs = pdfjsLib as typeof import("../pdfjs/build/types/src/pdf");
-
 import { DocumentEditorContent } from "@silverbulletmd/silverbullet/type/client";
+import { asset, editor, space } from "@silverbulletmd/silverbullet/syscalls";
+import { Message } from "../shared/message";
 import { DocumentMeta } from "@silverbulletmd/silverbullet/type/index";
-import { editor, space } from "@silverbulletmd/silverbullet/syscalls";
-import { version } from "../version";
+import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.mjs";
+import { version } from "../dist/version";
+
+const PLUG_NAME = "silverbullet-pdf";
 
 // For some reason pdfjs will use window.location when setting up a worker, and
 // once that fails it will set up a "fake worker". This prevents this.
-// @ts-expect-error
 self.window = self;
 
-const workerURL = "data:application/javascript," + encodeURIComponent(worker)
+let workerUrl: string | null = null;
 
-pdfjs.GlobalWorkerOptions.workerSrc = workerURL;
+async function ensureWorkerIsInitalized() {
+    if (workerUrl) return;
 
-export function viewer(): DocumentEditorContent {
-    return { html: html.replace("{{ SILVERBULLET-PDF-WORKER-JS }}", workerURL) };
+    const worker = await asset.readAsset(PLUG_NAME, "assets/pdf.worker.min.mjs");
+    const inlined = "data:application/javascript," + encodeURIComponent(worker);
+
+    workerUrl = inlined;
+    pdfjsLib.GlobalWorkerOptions.workerSrc = inlined;
+}
+
+export async function viewer(): Promise<DocumentEditorContent> {
+    await ensureWorkerIsInitalized();
+    const html = await asset.readAsset(PLUG_NAME, "assets/index.html");
+
+    // TODO: We should maybe test if loading the asset in the viewer is faster, but I would guess no.
+    return {
+        html: html.replace("{{ SILVERBULLET-PDF-WORKER-JS }}", workerUrl!),
+    }
+}
+
+export async function zoomIn(): Promise<void> {
+    await editor.sendMessage("custom", {
+        type: "zoom-in"
+    } satisfies Message);
+}
+
+export async function zoomOut(): Promise<void> {
+    await editor.sendMessage("custom", {
+        type: "zoom-out"
+    } satisfies Message);
+}
+
+export async function zoomToFitHeight(): Promise<void> {
+    await editor.sendMessage("custom", {
+        type: "zoom-to-fit",
+        fit: "height"
+    } satisfies Message);
+}
+
+export async function zoomToFitWidth(): Promise<void> {
+    await editor.sendMessage("custom", {
+        type: "zoom-to-fit",
+        fit: "width"
+    } satisfies Message);
+}
+
+export async function zoomToFitPage(): Promise<void> {
+    await editor.sendMessage("custom", {
+        type: "zoom-to-fit",
+        fit: "height"
+    } satisfies Message);
 }
 
 export async function extract({ meta }: { meta: DocumentMeta }) {
     if (meta.contentType !== "application/pdf") return;
 
+    await ensureWorkerIsInitalized();
+
     const raw = await space.readDocument(meta.name);
 
-    const task = pdfjs.getDocument(raw);
+    const task = pdfjsLib.getDocument(raw);
     const pdf = await task.promise;
 
     const textPromises = Array.from({ length: pdf.numPages }, async (_, i) => {
@@ -49,7 +95,7 @@ export async function extract({ meta }: { meta: DocumentMeta }) {
         return route;
     });
 
-    return { content: texts.join(""), cacheMode: "persistent", navigationMap };
+    return { content: texts.join(" "), cacheMode: "persistent", navigationMap };
 }
 
 export async function showVersion() {

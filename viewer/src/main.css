@@ -1,0 +1,50 @@
+html {
+    height: 100%;
+    font-family: var(--ui-font);
+
+    --silverbullet-pdf-highlight-padding-default-em: 0.05em;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    appearance: textfield;
+}
+
+.silverbullet-pdf-backlink-highlight-layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    transform-origin: 0 0;
+    pointer-events: none;
+}
+
+.silverbullet-pdf-backlink-highlight-layer .silverbullet-pdf-backlink {
+    position: absolute;
+    pointer-events: auto;
+}
+
+.silverbullet-pdf-backlink-highlight-layer .silverbullet-pdf-backlink.silverbullet-pdf-backlink-selection {
+    box-sizing: content-box;
+    cursor: text;
+}
+
+.silverbullet-pdf-backlink-highlight-layer .silverbullet-pdf-backlink.silverbullet-pdf-backlink-selection {
+    background-color: rgb(from var(--highlight-color) r g b / 0.2);
+    padding: var(--silverbullet-pdf-highlight-padding-default-em) var(--silverbullet-pdf-highlight-padding-default-em);
+    margin: calc(var(--silverbullet-pdf-highlight-padding-default-em) * -1) calc(var(--silverbullet-pdf-highlight-padding-default-emem) * -1);
+    border-radius: 0.1em;
+}

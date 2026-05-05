@@ -1,9 +1,11 @@
 name: silverbullet-pdf
+assets:
+  - "assets/**"
 functions:
-  PDFViewer:
-    path: ./main.ts:viewer
+  pdfViewer:
+    path: "./main.ts:viewer"
     editor: [ "pdf" ]
-  PDFSearch:
+  pdfSearch:
     path: ./main.ts:extract
     events:
       - silversearch:index
@@ -11,3 +13,32 @@ functions:
     path: "./main.ts:showVersion"
     command:
       name: "Silverbullet PDF: Version"
+  zoomIn:
+    path: "./main.ts:zoomIn"
+    command:
+      name: "PDF: Zoom in"
+      key: "Ctrl-+"
+      mac: "Cmd-+"
+      requireEditor: "pdfViewer"
+  zoomOut:
+    path: "./main.ts:zoomOut"
+    command:
+      name: "PDF: Zoom out"
+      key: "Ctrl--"
+      mac: "Cmd--"
+      requireEditor: "pdfViewer"
+  zoomToFitWidth:
+    path: "./main.ts:zoomToFitWidth"
+    command:
+      name: "PDF: Zoom to fit width"
+      requireEditor: "pdfViewer"
+  zoomToFitHeight:
+    path: "./main.ts:zoomToFitHeight"
+    command:
+      name: "PDF: Zoom to fit height"
+      requireEditor: "pdfViewer"
+  zoomToFitPage:
+    path: "./main.ts:zoomToFitPage"
+    command:
+      name: "PDF: Zoom to fit page"
+      requireEditor: "pdfViewer"

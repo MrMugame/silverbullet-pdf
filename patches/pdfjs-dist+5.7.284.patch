@@ -1,0 +1,64 @@
+diff --git a/node_modules/pdfjs-dist/legacy/build/pdf.mjs b/node_modules/pdfjs-dist/legacy/build/pdf.mjs
+index 5559b93..6089da8 100644
+--- a/node_modules/pdfjs-dist/legacy/build/pdf.mjs
++++ b/node_modules/pdfjs-dist/legacy/build/pdf.mjs
+@@ -21089,7 +21089,7 @@ class TextLayer {
+   #rotation = 0;
+   #scale = 0;
+   #styleCache = Object.create(null);
+-  #textContentItemsStr = [];
++  #textContentItems = [];
+   #textContentSource = null;
+   #textDivs = [];
+   #textDivProperties = new WeakMap();
+@@ -21213,7 +21213,10 @@ class TextLayer {
+     return this.#textDivs;
+   }
+   get textContentItemsStr() {
+-    return this.#textContentItemsStr;
++    return this.#textContentItems.map(t => t.str);
++  }
++  get textContentItems() {
++    return this.#textContentItems;
+   }
+   #processItems(items) {
+     if (this.#disableProcessItems) {
+@@ -21221,7 +21224,7 @@ class TextLayer {
+     }
+     this.#layoutTextParams.ctx ??= TextLayer.#getCtx(this.#lang);
+     const textDivs = this.#textDivs,
+-      textContentItemsStr = this.#textContentItemsStr;
++      textContentItems = this.textContentItems;
+     for (const item of items) {
+       if (textDivs.length > MAX_TEXT_DIVS_TO_RENDER) {
+         warn("Ignoring additional textDivs for performance reasons.");
+@@ -21245,12 +21248,14 @@ class TextLayer {
+         }
+         continue;
+       }
+-      textContentItemsStr.push(item.str);
++      textContentItems.push(item);
+       this.#appendText(item);
+     }
+   }
+   #appendText(geom) {
+     const textDiv = document.createElement("span");
++    textDiv.dataset.idx = this.#textDivs.length;
++    textDiv.classList.add("textLayerNode");
+     const textDivProperties = {
+       angle: 0,
+       canvasWidth: 0,
+diff --git a/node_modules/pdfjs-dist/legacy/web/pdf_viewer.mjs b/node_modules/pdfjs-dist/legacy/web/pdf_viewer.mjs
+index aac19d9..e78ace3 100644
+--- a/node_modules/pdfjs-dist/legacy/web/pdf_viewer.mjs
++++ b/node_modules/pdfjs-dist/legacy/web/pdf_viewer.mjs
+@@ -11668,6 +11668,9 @@ class TextLayerBuilder {
+     this.div.tabIndex = 0;
+     this.div.className = "textLayer";
+   }
++  get textLayer() {
++    return this.#textLayer;
++  }
+   async render({
+     viewport,
+     images,
