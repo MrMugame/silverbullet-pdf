@@ -1,4 +1,4 @@
-name: Edge
+name: Edge V2
 on:
   push:
     branches: v2
