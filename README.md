@@ -3,7 +3,7 @@ This is an experimental new version of Silverbullet PDF, which is custom build u
 
 ![screenshot](https://raw.githubusercontent.com/mrmugame/silverbullet-pdf/v2/docs/preview.png)
 
-# Possible future features
+## Possible future features
 - Embeds (currently not supported by SB)
 - Remove svelte name mangling for custom styling
 - Thumbnail viewer

@@ -34,7 +34,7 @@ jobs:
       - name: Update release tag
         uses: rickstaa/action-create-tag@v1
         with:
-          tag: "v2"
+          tag: "edge-v2"
           force_push_tag: true
 
       - name: Release
@@ -44,7 +44,7 @@ jobs:
         with:
           draft: false
           prerelease: true
-          tag_name: v2
+          tag_name: "edge-v2"
           body: Automated build from commit ${{ github.sha }}
           files: |
             worker/silverbullet-pdf.plug.js
