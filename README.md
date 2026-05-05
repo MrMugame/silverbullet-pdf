@@ -1,4 +1,8 @@
 # Silverbullet PDF
+
+> [!NOTE]
+> There is a very early version of a complete rewrite on the [v2](https://github.com/MrMugame/silverbullet-pdf/tree/v2) branch.
+
 This plug adds the ability to [Silverbullet](https://github.com/silverbulletmd/silverbullet) to view and annotate pdfs using a slightly modified version of the [pdfjs](https://github.com/mozilla/pdf.js) viewer. If used with [Silversearch](https://github.com/MrMugame/silversearch), Silverbullet PDF can extract text content from PDFs to help you search through them.
 
 ![screenshot](https://raw.githubusercontent.com/mrmugame/silverbullet-pdf/main/docs/preview.png)
